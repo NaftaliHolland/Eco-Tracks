@@ -7,13 +7,6 @@ from sqlalchemy.orm import relationship
 
 from models.base_model import BaseModel, Base
 
-"""user_activity_log = Table(
-            "user_activity_log", Base.metadata,
-            Column("user_id", String(60), ForeignKey("users.id")),
-            Column("activity_id", String(60), ForeignKey("activities.id"))
-        )
-
-"""
 class Activity(BaseModel, Base):
     """ Activity class """
 
