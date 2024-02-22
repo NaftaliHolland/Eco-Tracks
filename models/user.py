@@ -6,6 +6,8 @@
 from sqlalchemy import Column, String, Integer
 from sqlalchemy.orm import relationship
 
+
+from models.user_activity_log import UserActivityLog
 from models.base_model import BaseModel, Base
 
 class User(BaseModel, Base):
