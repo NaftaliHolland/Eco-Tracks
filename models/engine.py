@@ -72,6 +72,14 @@ class StorageEngine:
 
         return return_result
 
+    def one(self, cls=None, id=None):
+        """ Queries the database and returns one instance with the id == id"""
+
+        return_result = dict()
+        result = self.__session.query(cls).get(id)
+
+        return result 
+
     def new(self, obj):
         """ Adds object obj to the current database session """
 
