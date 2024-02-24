@@ -12,6 +12,7 @@ import os
 from models.user import User
 from models.activity import Activity
 from models.activity_type import ActivityType
+from datetime import datetime
 
 from models.base_model import Base
 
@@ -95,6 +96,19 @@ class StorageEngine:
         """ Deletes objj from the current database session """
         if obj:
             self.__session.delete()
+
+    def update(self, cls=None, id=None, to_update=None):
+        """ Updates an object """
+        obj_to_update = self.one(cls, id)
+
+        if obj_to_update:
+            for key, value in to_update.items():
+                setattr(obj_to_update, key, value)
+                setattr(obj_to_update, "updated_at", datetime.now())
+
+        self.__session.commit()
+        return obj_to_update
+
 
     def reload(self):
         """ Creates tables in the database """
