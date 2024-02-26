@@ -29,6 +29,9 @@ class BaseModel:
                                                     "%Y-%m-%dT%H:%M:%S.%f")
             del kwargs["__class__"] #TODO why delete this
 
+    def to_dict(self):
+        """ returns dictionary representation of object """
+        return self.__dict__
 
     def __str__(self):
         """ Returns a string representation of the instance """

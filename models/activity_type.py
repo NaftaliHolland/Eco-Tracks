@@ -15,4 +15,4 @@ class ActivityType(BaseModel, Base):
 
     name = Column(String(255), nullable=False)
     description = Column(String(510))
-    activities = relationship("Activity", back_populates="activity_type")
+    activities = relationship("Activity", back_populates="activity_type", cascade="all, delete-orphan")
