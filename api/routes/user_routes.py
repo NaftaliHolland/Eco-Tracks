@@ -8,6 +8,7 @@ from flask import request
 from models.database_utils.get_models import get_models
 from models.database_utils.create_model import create_model
 from models.database_utils.update_model import update_model
+from models.database_utils.delete_model import delete_model
 
 user_bp = Blueprint("user_bp", __name__)
 
@@ -28,15 +29,16 @@ def get_users():
 def get_user(id):
     """ returns a user with id=id """
 
-    user_dict = dict()
     user = get_models(cls="User", id=id)
     
-    user_dict["name"] = user.name
-    user_dict["email"] = user.email
-    user_dict["id"] = user.id
-    user_dict["created_at"] = user.created_at
-    user_dict["updated_at"] = user.updated_at
-    user_dict["points_earned"] = user.points_earned
+    user_dict = {
+            "name": user.name,
+            "email": user.email,
+            "id": user.id,
+            "created_at": user.created_at,
+            "updated_at": user.updated_at,
+            "points_earned": user.pointes_earned
+        }
 
     return jsonify(user_dict)
 
@@ -51,24 +53,39 @@ def create_user():
             "password": request.json["password"]
             }
     user = create_model(user_dict, cls="User")
-    print(user)
-    print(type(user))
 
     return jsonify(user_dict)
 
 @user_bp.route("/v1.0.0/users/<string:id>", methods=["DELETE"])
-def delete_user():
+def delete_user(id):
     """ Deletes a user """
 
-    return "delete user"
+    # Get user to delete
+    user = delete_model(cls="User", id=id)
+    user_dict = {
+            "name": user.name,
+            "email": user.email,
+            "id": user.id,
+            "created_at": user.created_at,
+            "updated_at": user.updated_at,
+            "points_earned": user.pointes_earned
+        }
+
+    return jsonify(user_dict)
 
 @user_bp.route("/v1.0.0/users/<string:id>", methods=["PUT"])
 def update_user():
     """ Updates a user """
 
-    user_dict = dict()
-
     user = updated_model(id=id, to_update=request.json, cls="User")
 
-    
-    return "update user"
+    user_dict = {
+            "name": user.name,
+            "email": user.email,
+            "id": user.id,
+            "created_at": user.created_at,
+            "updated_at": user.updated_at,
+            "points_earned": user.pointes_earned
+        }
+
+    return jsonify(user_dict)
