@@ -95,7 +95,8 @@ class StorageEngine:
     def delete(self, obj=None):
         """ Deletes objj from the current database session """
         if obj:
-            self.__session.delete()
+            self.__session.delete(obj)
+        self.__session.commit()
 
     def update(self, cls=None, id=None, to_update=None):
         """ Updates an object """
