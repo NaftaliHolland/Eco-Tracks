@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Text
 import androidx.compose.material3.Button
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.foundation.layout.Arrangement
@@ -30,13 +31,26 @@ import com.example.ecotracks.R
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.input.ImeAction
 import com.example.ecotracks.ui.theme.EcoTracksTheme
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.material.icons.Icons
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 
 @Composable
 fun SignUpScreen(
     modifier: Modifier = Modifier
 ) {
+    var name by rememberSaveable { mutableStateOf("") }
+    var email by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
+    var repeatPassword by rememberSaveable { mutableStateOf("") }
+
+    var posswordVisible by rememberSaveable { mutableStateOf(false) }
+
     Column(
         modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium)),
         verticalArrangement = Arrangement.Center,
@@ -49,8 +63,8 @@ fun SignUpScreen(
                 .align(Alignment.Start)
         )
         OutlinedTextField(
-            value = "",
-            onValueChange = { },
+            value = name,
+            onValueChange = { name = it},
             singleLine = true,
             shape = shapes.small,
             modifier = Modifier
@@ -73,8 +87,8 @@ fun SignUpScreen(
                 .align(Alignment.Start)
         )
         OutlinedTextField(
-            value = "",
-            onValueChange = { },
+            value = email,
+            onValueChange = { email = it },
             singleLine = true,
             shape = shapes.small,
             modifier = Modifier
@@ -98,8 +112,8 @@ fun SignUpScreen(
                 .align(Alignment.Start)
         )
         OutlinedTextField(
-            value = "",
-            onValueChange = { },
+            value = password,
+            onValueChange = { password = it},
             singleLine = true,
             shape = shapes.small,
             modifier = Modifier
@@ -114,17 +128,17 @@ fun SignUpScreen(
             //placeholder = "naftalihollan01@gmail.com",
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Next
-            )
+            ),
+            visualTransformation = PasswordVisualTransformation(),
         )
-
         Text(
             text = stringResource(R.string.repeat_password),
             modifier = Modifier
                 .align(Alignment.Start)
         )
         OutlinedTextField(
-            value = "",
-            onValueChange = { },
+            value = repeatPassword,
+            onValueChange = { repeatPassword = it},
             singleLine = true,
             shape = shapes.small,
             modifier = Modifier
@@ -139,7 +153,8 @@ fun SignUpScreen(
             //placeholder = "naftalihollan01@gmail.com",
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Done
-            )
+            ),
+            visualTransformation = PasswordVisualTransformation(),
         )
 
         Button(
@@ -150,7 +165,10 @@ fun SignUpScreen(
             onClick = { /* TO DO */},
 
         ) {
-            Text(stringResource(id = R.string.create_account))
+            Text(
+                stringResource(id = R.string.create_account),
+                modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium))
+            )
         }
 
         Row(modifier = modifier) {
@@ -158,7 +176,7 @@ fun SignUpScreen(
                 text = stringResource(id = R.string.already_have_an_account)
             )
             Text(
-                text = stringResource(id = R.string.sign_up)
+                text = stringResource(id = R.string.sign_in)
             )
         }
     }
