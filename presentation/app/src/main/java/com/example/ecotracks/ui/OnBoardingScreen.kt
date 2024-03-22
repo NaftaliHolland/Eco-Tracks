@@ -45,6 +45,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.material.icons.Icons
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import com.example.ecotracks.ui.Stats
+import com.example.ecotracks.ui.UserInfo
 
 @Composable
 fun OnBoardingScreen(
@@ -102,5 +104,5 @@ fun OnBoardingScreen(
 @Preview(showBackground = true)
 @Composable
 fun OnBoardingScreenPreview() {
-    OnBoardingScreen()
+    UserInfo("Holland")
 }

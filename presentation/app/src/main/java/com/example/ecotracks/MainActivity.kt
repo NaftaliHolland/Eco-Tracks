@@ -14,6 +14,8 @@ import com.example.ecotracks.ui.theme.EcoTracksTheme
 import com.example.ecotracks.ui.SignUpScreen
 import com.example.ecotracks.ui.LoginScreen
 import com.example.ecotracks.ui.OnBoardingScreen
+import com.example.ecotracks.ui.Stats
+import com.example.ecotracks.ui.HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    OnBoardingScreen()
+                    HomeScreen()
                 }
             }
         }

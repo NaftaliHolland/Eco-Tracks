@@ -9,10 +9,26 @@
     <string name="create_account">Create account</string>
     <string name="sign_up_with_google">Sign up with Google</string>
     <string name="or">or</string>
+    <string name="activity_history">Activity history</string>
     <string name="already_have_an_account">Already have an account? </string>
     <string name="dont_have_an_account">Don\'t have an account?</string>
     <string name="forgot_password">Forgot the password?</string>
     <string name="welcome_back">Welcome back!</string>
     <string name="save_the_earth">Save the earth with Eco Tracks</string>
+    <string name="carbon_saved">%1$s kgs of co2 saved</string>
+    <string name="carbon_quantity">%1$s kg</string>
+    <string name="carbon_emitted">%1$s kg of co2 emitted</string>
     <string name="calculate_and_reduce_your_carbon_footprint">Calculate and reduce your carbon footprint</string>
+    <string name="today">Today</string>
+    <string name="last_month">Last month</string>
+    <string name="co_2">Co2</string>
+    <string name="last_year">Last year</string>
+    <string name="average_for_a_month">Avarage for a month</string>
+    <string name="emission_info">The average footprint emission in kenya is %1$s Kgs per month</string>
+    <string name="hello">Hello, %1$s!</string>
+    <string name="what_to_do">What do you want to do for the planet today</string>
+
+    <string name="activity_name">Walking</string>
+    <string name="activity_description">Activity description</string>
+    <string name="activity_carbon_saving_factor">24.2</string>
 </resources>
