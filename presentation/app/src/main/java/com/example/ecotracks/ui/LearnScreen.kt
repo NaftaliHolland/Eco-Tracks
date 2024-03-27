@@ -34,6 +34,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -46,7 +48,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
+import androidx.compose.foundation.layout.Column
 import androidx.navigation.NavHostController
+import com.example.ecotracks.model.LearnCategory
+import com.example.ecotracks.ui.components.LearnFilterChip
+import com.example.ecotracks.data.DataSource
 
 
 @Composable
@@ -55,9 +61,43 @@ fun LearnScreen(navController: NavHostController = rememberNavController()) {
         text = "learn"
     )
 }
+@Composable
+fun LearnIntro() {
+
+}
+
+@Composable
+fun LearnFilters(
+    learnCategoryList: List<LearnCategory>,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(
+            text = stringResource(id = R.string.read_latest_news),
+            modifier = Modifier.padding(bottom = 0.dp)
+        )
+        LazyRow() {
+            items(learnCategoryList) { learnCategory ->
+                LearnFilterChip(learnCategory.learnCategory)
+                Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.spacer_height)))
+            }
+        }
+    }
+
+}
+
+@Composable
+fun Cards() {
+
+}
+
+
 
 @Preview(showBackground = true)
 @Composable
 fun LearnScreenPreview(){
-    LearnScreen()
+    var filterCategories = DataSource().LoadLearnCategories()
+    LearnFilters(filterCategories)
 }

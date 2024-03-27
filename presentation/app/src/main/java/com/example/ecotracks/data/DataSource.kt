@@ -3,6 +3,7 @@ package com.example.ecotracks.data
 import com.example.ecotracks.R
 import com.example.ecotracks.model.BottomSheetItem
 import com.example.ecotracks.model.UserActivity
+import com.example.ecotracks.model.LearnCategory
 
 class DataSource() {
     fun loadUserActivities() : List<UserActivity> {
@@ -56,6 +57,20 @@ class DataSource() {
                 R.string.activity,
                 R.drawable.activity
             ),
+        )
+    }
+
+    fun LoadLearnCategories() : List<LearnCategory> {
+        return listOf<LearnCategory> (
+            LearnCategory(
+                R.string.transport
+            ),
+            LearnCategory(
+                R.string.home
+            ),
+            LearnCategory(
+                R.string.activity
+            )
         )
     }
 }

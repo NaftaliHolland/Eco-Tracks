@@ -33,6 +33,7 @@
     <string name="emission_info">The average footprint emission in kenya is %1$s Kgs per month</string>
     <string name="hello">Hello, %1$s!</string>
     <string name="what_to_do">What do you want to do for the planet today</string>
+    <string name="read_latest_news">Read your latest news and eco-tips</string>
 
     <string name="activity_name">Walking</string>
     <string name="activity_description">Activity description</string>
