@@ -1,6 +1,7 @@
 package com.example.ecotracks.data
 
 import com.example.ecotracks.R
+import com.example.ecotracks.model.BottomSheetItem
 import com.example.ecotracks.model.UserActivity
 
 class DataSource() {
@@ -34,6 +35,27 @@ class DataSource() {
                 R.drawable.directions_walk_24px,
                 R.string.activity_carbon_saving_factor
             )
+        )
+    }
+
+    fun loadBottomSheetItems() : List<BottomSheetItem> {
+        return listOf<BottomSheetItem>(
+            BottomSheetItem(
+                R.string.meal,
+                R.drawable.food
+            ),
+            BottomSheetItem(
+                R.string.transport,
+                R.drawable.transport
+            ),
+            BottomSheetItem(
+                R.string.home,
+                R.drawable.home_24px
+            ),
+            BottomSheetItem(
+                R.string.activity,
+                R.drawable.activity
+            ),
         )
     }
 }

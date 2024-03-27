@@ -6,12 +6,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material3.Icon
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.material3.Text
 import androidx.compose.material3.Button
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.material3.Card
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -55,21 +57,38 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.Scaffold
 import androidx.compose.ui.graphics.Color
 import com.example.ecotracks.data.DataSource
 import com.example.ecotracks.ui.OnBoardingScreen
+import com.example.ecotracks.ui.components.BottomBar2
+import com.example.ecotracks.ui.components.FloatingButton
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavHostController
 
 
 @Composable
-fun HomeScreen() {
-    Column(
-        verticalArrangement = Arrangement.SpaceEvenly
-    ){
-        UserInfo("Holland")
-        Stats(53.23)
-        Filters()
-        avg_stats(25.5, 22.5)
-        UserActivityHistory(userActivityList = DataSource().loadUserActivities())
+fun HomeScreen(navController: NavHostController = rememberNavController()) {
+    Scaffold(
+        topBar = { },
+        bottomBar = { BottomBar2(navController = navController) },
+        floatingActionButton =  { FloatingButton() },
+        floatingActionButtonPosition = FabPosition.Center,
+        containerColor = colorScheme.surfaceVariant,
+    ) { innerPadding ->
+        Column(
+            verticalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier
+                .padding(dimensionResource(id = R.dimen.padding_small))
+                .consumeWindowInsets(innerPadding),
+        ){
+            UserInfo("Holland")
+            Stats(53.23)
+            Filters()
+            avg_stats(25.5, 22.5)
+            UserActivityHistory(userActivityList = DataSource().loadUserActivities())
+        }
     }
 }
 
@@ -79,19 +98,22 @@ fun UserInfo(name: String) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(dimensionResource(id = R.dimen.padding_small)),
-        horizontalArrangement = Arrangement.SpaceEvenly
+        horizontalArrangement = Arrangement.Center
     ) {
         Column(
 
         ) {
             Text(
                 text = stringResource(id = R.string.hello, name),
-                style = MaterialTheme.typography.displayLarge
+                style = MaterialTheme.typography.displayMedium
             )
             Text(
                 text = stringResource(id = R.string.what_to_do)
             )
         }
+        Spacer(
+            modifier = Modifier.weight(1f)
+        )
         Icon(
             painter = painterResource(id = R.drawable.person_24px),
             contentDescription = "",
@@ -101,11 +123,12 @@ fun UserInfo(name: String) {
 
 @Composable
 fun Stats(co2_amount: Double) {
-    Column(
+    Card(
         modifier = Modifier
-            .fillMaxWidth(),
-        verticalArrangement = Arrangement.SpaceBetween,
-        horizontalAlignment = Alignment.CenterHorizontally
+            .fillMaxWidth()
+            .padding(dimensionResource(id = R.dimen.padding_medium)),
+        //verticalArrangement = Arrangement.SpaceBetween,
+        //horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column(
             modifier = Modifier
@@ -213,10 +236,11 @@ fun UserActivityHistory(
     modifier: Modifier = Modifier
 ) {
     Text(
-        text = stringResource(id = R.string.activity_history)
+        text = stringResource(id = R.string.activity_history),
+        modifier = Modifier.padding(bottom = 0.dp)
     )
     LazyColumn(
-        modifier = modifier
+        modifier = Modifier.padding(top = 0.dp)
     ) {
         items(userActivityList) { userActivity ->
             UserActivity(userActivity = userActivity)
@@ -254,5 +278,5 @@ fun UserActivity(userActivity: UserActivity) {
 @Preview(showBackground = true)
 @Composable
 fun UserActivityPreview() {
-        HomeScreen()
+            HomeScreen()
     }

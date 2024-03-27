@@ -23,6 +23,12 @@
     <string name="last_month">Last month</string>
     <string name="co_2">Co2</string>
     <string name="last_year">Last year</string>
+
+    <string name="meal">meal</string>
+    <string name="transport">Transport</string>
+    <string name="home">Home</string>
+    <string name="activity">Activity</string>
+
     <string name="average_for_a_month">Avarage for a month</string>
     <string name="emission_info">The average footprint emission in kenya is %1$s Kgs per month</string>
     <string name="hello">Hello, %1$s!</string>

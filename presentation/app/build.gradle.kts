@@ -61,6 +61,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     testImplementation(libs.junit)
+    implementation("androidx.compose.material:material:1.6.4")
+    implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation ("androidx.compose.material3:material3:1.2.1")
     implementation("androidx.compose.material3:material3-window-size-class:1.2.1")
     implementation("androidx.compose.material3:material3-adaptive-navigation-suite:1.0.0-alpha05")
