@@ -1,5 +1,6 @@
 package com.example.ecotracks.ui
 
+
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -33,6 +34,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -49,55 +51,60 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Surface
 import androidx.navigation.NavHostController
 import com.example.ecotracks.model.LearnCategory
 import com.example.ecotracks.ui.components.LearnFilterChip
 import com.example.ecotracks.data.DataSource
+import com.example.ecotracks.ui.components.NormalTextComponent
+import com.example.ecotracks.ui.components.HeadingTextComponent
+import com.example.ecotracks.ui.components.MyTextField
+import com.example.ecotracks.ui.components.PasswordTextFieldComponent
+import com.example.ecotracks.ui.components.CheckBoxComponent
+import com.example.ecotracks.ui.components.PrimaryButtonComponent
 
 
 @Composable
-fun LearnScreen(navController: NavHostController = rememberNavController()) {
-    Text(
-        text = "learn"
-    )
-}
-@Composable
-fun LearnIntro() {
-
-}
-
-@Composable
-fun LearnFilters(
-    learnCategoryList: List<LearnCategory>,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Text(
-            text = stringResource(id = R.string.read_latest_news),
-            modifier = Modifier.padding(bottom = 0.dp)
-        )
-        LazyRow() {
-            items(learnCategoryList) { learnCategory ->
-                LearnFilterChip(learnCategory.learnCategory)
-                Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.spacer_height_medium)))
-            }
+fun SignUpScreeen() {
+    Surface(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(dimensionResource(id = R.dimen.padding_large))
+    ){
+        Column(
+            modifier = Modifier
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_large))
+        ) {
+            NormalTextComponent(stringResource(id = R.string.hello, "there"))
+            HeadingTextComponent(stringResource(id = R.string.create_account))
+            MyTextField(
+                labelValue = stringResource(id = R.string.full_name),
+                leadingIconRes = R.drawable.person_24px
+                )
+            MyTextField(
+                labelValue = stringResource(id = R.string.email_address),
+                leadingIconRes = R.drawable.baseline_email_24
+            )
+            PasswordTextFieldComponent(
+                labelValue = stringResource(id = R.string.password),
+                leadingIconRes = R.drawable.baseline_lock_outline_24
+            )
+            PasswordTextFieldComponent(
+                labelValue = stringResource(id = R.string.repeat_password),
+                leadingIconRes = R.drawable.baseline_lock_outline_24
+            )
+            CheckBoxComponent(stringResource(id = R.string.terms_and_conditions))
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_height_large)))
+            PrimaryButtonComponent(stringResource(id = R.string.sign_up))
         }
+
     }
-
 }
-
-@Composable
-fun Cards() {
-
-}
-
-
 
 @Preview(showBackground = true)
 @Composable
-fun LearnScreenPreview(){
-    var filterCategories = DataSource().LoadLearnCategories()
-    LearnFilters(filterCategories)
+fun SignUpScreeenPreview() {
+    SignUpScreeen()
 }

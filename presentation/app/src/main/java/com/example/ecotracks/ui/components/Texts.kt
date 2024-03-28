@@ -1,4 +1,4 @@
-package com.example.ecotracks.ui
+package com.example.ecotracks.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.background
@@ -47,57 +47,48 @@ import com.example.ecotracks.ui.HomeScreen
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.heightIn
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.foundation.layout.Column
+import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavHostController
 import com.example.ecotracks.model.LearnCategory
 import com.example.ecotracks.ui.components.LearnFilterChip
 import com.example.ecotracks.data.DataSource
 
-
 @Composable
-fun LearnScreen(navController: NavHostController = rememberNavController()) {
+fun NormalTextComponent(value: String) {
     Text(
-        text = "learn"
+        text = value,
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = 40.dp),
+        style = MaterialTheme.typography.bodyLarge,
+        textAlign = TextAlign.Center
     )
 }
-@Composable
-fun LearnIntro() {
 
+@Composable
+fun HeadingTextComponent(value: String) {
+    Text(
+        text = value,
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(),
+        style = MaterialTheme.typography.titleLarge,
+        textAlign = TextAlign.Center
+    )
 }
 
 @Composable
-fun LearnFilters(
-    learnCategoryList: List<LearnCategory>,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Text(
-            text = stringResource(id = R.string.read_latest_news),
-            modifier = Modifier.padding(bottom = 0.dp)
-        )
-        LazyRow() {
-            items(learnCategoryList) { learnCategory ->
-                LearnFilterChip(learnCategory.learnCategory)
-                Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.spacer_height_medium)))
-            }
-        }
-    }
-
-}
-
-@Composable
-fun Cards() {
-
-}
-
-
-
-@Preview(showBackground = true)
-@Composable
-fun LearnScreenPreview(){
-    var filterCategories = DataSource().LoadLearnCategories()
-    LearnFilters(filterCategories)
+fun SmallTextComponent(value: String) {
+    Text(
+        text = value,
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = 40.dp)
+            .padding(top = dimensionResource(id = R.dimen.padding_small)),
+        style = MaterialTheme.typography.labelSmall,
+        textAlign = TextAlign.Start
+    )
 }

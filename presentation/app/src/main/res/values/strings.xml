@@ -38,4 +38,6 @@
     <string name="activity_name">Walking</string>
     <string name="activity_description">Activity description</string>
     <string name="activity_carbon_saving_factor">24.2</string>
+
+    <string name="terms_and_conditions">By continuing you accept our Privacy Policy and Terms of Use</string>
 </resources>
