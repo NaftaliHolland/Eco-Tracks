@@ -45,13 +45,24 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.material.icons.Icons
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.ecotracks.ui.Stats
 import com.example.ecotracks.ui.UserInfo
+import com.example.ecotracks.ui.components.PrimaryButtonComponent
+import com.example.ecotracks.ui.components.ClickText
+import com.example.ecotracks.ui.components.NormalTextComponent
+import com.example.ecotracks.ui.components.HeadingTextComponent
 
 @Composable
 fun OnBoardingScreen(
+    navController: NavHostController = rememberNavController(),
     modifier: Modifier = Modifier
 ) {
+
+    val onClick: () -> Unit = {
+        navController.navigate("sign_up")
+    }
     Column(
         modifier = Modifier
             .padding(dimensionResource(id = R.dimen.padding_medium))
@@ -64,8 +75,15 @@ fun OnBoardingScreen(
             painter = painterResource(R.drawable.save_earth),
             contentDescription = ""
         )
-
-        Text(
+        HeadingTextComponent(stringResource(id = R.string.save_the_earth))
+        NormalTextComponent(stringResource(id = R.string.calculate_and_reduce_your_carbon_footprint))
+        PrimaryButtonComponent(stringResource(id = R.string.create_account), onClick = onClick)
+        Row(modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium))) {
+            NormalTextComponent(stringResource(id = R.string.already_have_an_account))
+            ClickText(stringResource(id = R.string.sign_in))
+        }
+    }
+        /*Text(
             text = stringResource(id = R.string.save_the_earth),
             style = MaterialTheme.typography.titleLarge,
             textAlign = TextAlign.Center,
@@ -98,11 +116,11 @@ fun OnBoardingScreen(
                 text = stringResource(id = R.string.sign_in)
             )
         }
-    }
+    }*/
 }
 
 @Preview(showBackground = true)
 @Composable
 fun OnBoardingScreenPreview() {
-    UserInfo("Holland")
+    OnBoardingScreen()
 }

@@ -17,6 +17,8 @@
     <string name="save_the_earth">Save the earth with Eco Tracks</string>
     <string name="carbon_saved">%1$s kgs of co2 saved</string>
     <string name="carbon_quantity">%1$s kg</string>
+
+    <string name="time_to_read">%1$d minutes</string>
     <string name="carbon_emitted">%1$s kg of co2 emitted</string>
     <string name="calculate_and_reduce_your_carbon_footprint">Calculate and reduce your carbon footprint</string>
     <string name="today">Today</string>
@@ -40,4 +42,15 @@
     <string name="activity_carbon_saving_factor">24.2</string>
 
     <string name="terms_and_conditions">By continuing you accept our Privacy Policy and Terms of Use</string>
+
+    <string name="email_cant_be_blank">The email can\'t be blank</string>
+
+
+    <string name="article_title">Address energy use and associated financial barriers</string>
+    <string name="article_content">
+        Transitioning to renewable sources like solar, wind and hydroelectric power can involve significant financial investments and infrastructure changes. Even when implemented, renewable energy sources can be intermittent, making it crucial to develop efficient energy storage solutions for a consistent power supply
+        Some sectors lack well-developed technologies for decarbonization, creating challenges in finding suitable alternatives to high-emissions processes. SAP uses 100% green electricity to power the company’s data centres and is fitting solar across several operations.
+        We also invest in collaborations to accelerate and scale green hydrogen production and other solutions. Every sector is different, so working with start-ups and other innovative organizations in your industry is important. Switching to low-carbon technologies and processes often requires substantial upfront investments that might not yield immediate returns, especially for smaller firms that may struggle to secure financing for net zero investments.
+        Organizations can explore funding options like green bonds, government incentives and partnerships with sustainable investors. Prioritizing projects with short payback periods can ease financial strain and build confidence.
+    </string>
 </resources>

@@ -18,7 +18,6 @@ import com.example.ecotracks.ui.Stats
 import com.example.ecotracks.ui.HomeScreen
 import com.example.ecotracks.ui.LearnScreen
 import com.example.ecotracks.ui.Navigation
-import com.example.ecotracks.ui.SignUpScreeen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,9 +29,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SignUpScreeen()
+                    //LoginScreeen()
+                    //SignUpScreen()
                     //Navigation()
                     //HomeScreen()
+                    LearnScreen()
                 }
             }
         }

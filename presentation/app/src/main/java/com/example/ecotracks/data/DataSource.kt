@@ -3,7 +3,8 @@ package com.example.ecotracks.data
 import com.example.ecotracks.R
 import com.example.ecotracks.model.BottomSheetItem
 import com.example.ecotracks.model.UserActivity
-import com.example.ecotracks.model.LearnCategory
+import com.example.ecotracks.model.ArticleCategory
+import com.example.ecotracks.model.Article
 
 class DataSource() {
     fun loadUserActivities() : List<UserActivity> {
@@ -60,17 +61,53 @@ class DataSource() {
         )
     }
 
-    fun LoadLearnCategories() : List<LearnCategory> {
-        return listOf<LearnCategory> (
-            LearnCategory(
+    fun loadLearnCategories() : List<ArticleCategory> {
+        return listOf<ArticleCategory> (
+            ArticleCategory(
                 R.string.transport
             ),
-            LearnCategory(
+            ArticleCategory(
                 R.string.home
             ),
-            LearnCategory(
+            ArticleCategory(
                 R.string.activity
             )
+        )
+    }
+
+    fun loadArticles() : List<Article> {
+        return listOf<Article> (
+            Article(
+                title = R.string.article_title,
+                content = R.string.article_content,
+                timeToRead = R.integer.time_to_read,
+            ),
+            Article(
+                title = R.string.article_title,
+                content = R.string.article_content,
+                timeToRead = R.integer.time_to_read,
+            ),
+            Article(
+                title = R.string.article_title,
+                content = R.string.article_content,
+                timeToRead = R.integer.time_to_read,
+            ),
+            Article(
+                title = R.string.article_title,
+                content = R.string.article_content,
+                timeToRead = R.integer.time_to_read,
+            ),
+            Article(
+                title = R.string.article_title,
+                content = R.string.article_content,
+                timeToRead = R.integer.time_to_read,
+            ),
+            Article(
+                title = R.string.article_title,
+                content = R.string.article_content,
+                timeToRead = R.integer.time_to_read,
+            ),
+
         )
     }
 }

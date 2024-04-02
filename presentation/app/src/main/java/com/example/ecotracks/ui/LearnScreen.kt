@@ -1,86 +1,84 @@
 package com.example.ecotracks.ui
 
 import androidx.compose.runtime.Composable
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.FloatingActionButtonDefaults
-import androidx.compose.material3.BottomAppBarDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.integerResource
 import com.example.ecotracks.R
 import androidx.compose.material3.FabPosition
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material3.MaterialTheme
-import com.example.ecotracks.ui.HomeScreen
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.navigation.NavHostController
-import com.example.ecotracks.model.LearnCategory
-import com.example.ecotracks.ui.components.LearnFilterChip
+import com.example.ecotracks.model.ArticleCategory
+import com.example.ecotracks.ui.components.ArticleFilterChip
 import com.example.ecotracks.data.DataSource
+import com.example.ecotracks.ui.components.BottomBar2
+import com.example.ecotracks.ui.components.FloatingButton
+import com.example.ecotracks.model.Article
+import androidx.compose.material3.Surface
+import com.example.ecotracks.ui.components.ArticleCard
 
 
+var filterCategories = DataSource().loadLearnCategories()
+var articles = DataSource().loadArticles()
 @Composable
 fun LearnScreen(navController: NavHostController = rememberNavController()) {
-    Text(
-        text = "learn"
-    )
+    Scaffold(
+        topBar = { },
+        bottomBar = { BottomBar2(navController = navController) },
+        floatingActionButton =  { FloatingButton() },
+        floatingActionButtonPosition = FabPosition.Center,
+        //containerColor = MaterialTheme.colorScheme.surfaceVariant,
+    ) { innerPadding ->
+
+        Column(
+            verticalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier
+                .padding(dimensionResource(id = R.dimen.padding_large))
+                .consumeWindowInsets(innerPadding),
+        ) {
+            ArticleFilters(filterCategories)
+            ArticleCards(articles)
+        }
+    }
 }
 @Composable
-fun LearnIntro() {
-
-}
-
-@Composable
-fun LearnFilters(
-    learnCategoryList: List<LearnCategory>,
-    modifier: Modifier = Modifier
+fun ArticleFilters(
+    ArticleCategoryList: List<ArticleCategory>,
+    //modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
     ) {
         Text(
             text = stringResource(id = R.string.read_latest_news),
-            modifier = Modifier.padding(bottom = 0.dp)
+            modifier = Modifier.padding(bottom = 0.dp),
+            style = MaterialTheme.typography.titleLarge
         )
         LazyRow() {
-            items(learnCategoryList) { learnCategory ->
-                LearnFilterChip(learnCategory.learnCategory)
+            items(ArticleCategoryList) { ArticleCategory ->
+                ArticleFilterChip(ArticleCategory.articleCategory)
                 Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.spacer_height_medium)))
             }
         }
@@ -89,8 +87,21 @@ fun LearnFilters(
 }
 
 @Composable
-fun Cards() {
-
+fun ArticleCards(
+    articleList: List<Article>,
+    modifier: Modifier = Modifier
+) {
+    LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium)),
+    ) {
+        items(articleList) { article ->
+            ArticleCard(
+                title = stringResource(id = article.title),
+                content = stringResource(id = article.content),
+                timeToRead = integerResource(article.timeToRead)
+            )
+        }
+    }
 }
 
 
@@ -98,6 +109,7 @@ fun Cards() {
 @Preview(showBackground = true)
 @Composable
 fun LearnScreenPreview(){
-    var filterCategories = DataSource().LoadLearnCategories()
-    LearnFilters(filterCategories)
+    //var filterCategories = DataSource().loadLearnCategories()
+    //LearnFilters(filterCategories)
+    LearnScreen()
 }

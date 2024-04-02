@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.ui.Alignment
 import androidx.compose.material3.MaterialTheme.shapes
+import com.example.ecotracks.model.TextFieldState
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.ui.res.dimensionResource
@@ -45,7 +46,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 
 @Composable
-fun PrimaryButtonComponent(value: String) {
+fun PrimaryButtonComponent(value: String, onClick: () -> Unit = {}) {
     Button(
     modifier = Modifier
     .fillMaxWidth()
@@ -54,8 +55,8 @@ fun PrimaryButtonComponent(value: String) {
     top = dimensionResource(id = R.dimen.padding_medium)
     ),
     shape = shapes.small,
-    onClick = { /* TO DO */},
-
+    onClick = {
+        onClick() },
     ) {
 
         Text(

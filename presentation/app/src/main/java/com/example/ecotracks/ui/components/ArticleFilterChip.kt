@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun LearnFilterChip(
+fun ArticleFilterChip(
     category: Int,
 ) {
     var selected by remember { mutableStateOf(false) }
@@ -47,5 +47,5 @@ fun LearnFilterChip(
 
 @Preview(showBackground = true)
 @Composable
-fun LearnFilterChipPreview() {
+fun ArticleFilterChipPreview() {
 }
