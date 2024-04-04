@@ -50,16 +50,11 @@ import com.example.ecotracks.ui.Screen
 import com.example.ecotracks.ui.Navigation
 import androidx.navigation.compose.rememberNavController
 
-
 @Composable
-fun BottomBar() {
-}
-
-@Composable
-fun BottomBar2(navController: NavHostController = rememberNavController()) {
+fun BottomBar(navController: NavHostController = rememberNavController()) {
     BottomNavigation(
         elevation = 12.dp,
-        backgroundColor = MaterialTheme.colorScheme.surfaceContainer
+        backgroundColor = MaterialTheme.colorScheme.inverseOnSurface
     ) {
         BottomNavigationItem(
             icon = { Icon(
@@ -67,14 +62,16 @@ fun BottomBar2(navController: NavHostController = rememberNavController()) {
                 contentDescription = "",
             ) },
             selected = false,
-            onClick = { }
+            label = { Text(stringResource(id = R.string.home)) },
+            onClick = { navController.navigate("home") }
         )
         BottomNavigationItem(
             icon = { Icon(
-                painter = painterResource(id = R.drawable.settings_24px),
+                painter = painterResource(id = R.drawable.learn),
                 contentDescription = "",
             ) },
             selected = false,
+            label = { Text(stringResource(id = R.string.learn)) },
             onClick = { navController.navigate("learn")}
         )
         BottomNavigationItem(
@@ -83,6 +80,7 @@ fun BottomBar2(navController: NavHostController = rememberNavController()) {
                 contentDescription = "",
             ) },
             selected = false,
+            label = { Text(stringResource(id = R.string.learn)) },
             onClick = { }
         )
         BottomNavigationItem(
@@ -91,33 +89,38 @@ fun BottomBar2(navController: NavHostController = rememberNavController()) {
                 contentDescription = "",
             ) },
             selected = false,
+            label = { Text(stringResource(id = R.string.learn)) },
             onClick = { }
         )
     }
 }
 
 @Composable
-fun FloatingButton() {
+fun FloatingButton(onClick: () -> Unit = {}) {
     FloatingActionButton(
-        onClick = { },
+        onClick = { onClick() },
         shape = CircleShape,
     ) {
-        Icon(
-            painter = painterResource(id = R.drawable.add_circle_24px),
-            contentDescription = "FloatingActionButton"
-        )
+        Row(
+            modifier = Modifier.width(400.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.add_circle_24px),
+                contentDescription = "FloatingActionButton"
+            )
+            Text(
+                text = stringResource(id = R.string.record_emission)
+            )
+        }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
 fun BottomBarPreview() {
-    Scaffold(
-        topBar = { },
-        content = { HomeScreen() },
-        bottomBar = { BottomBar2() },
-        floatingActionButton =  { FloatingButton() },
-        floatingActionButtonPosition = FabPosition.Center,
-        containerColor = MaterialTheme.colorScheme.surfaceVariant,
-    )
+    //BottomBar()
+    FloatingButton()
 }

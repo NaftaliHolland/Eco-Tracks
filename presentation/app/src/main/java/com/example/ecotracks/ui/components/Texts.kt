@@ -11,6 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
@@ -52,6 +53,20 @@ fun ArticleTitleComponent(value: String) {
 }
 
 @Composable
+fun ArticleCardContentComponent(value: String) {
+    Text(
+        text = value,
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(),
+        style = MaterialTheme.typography.bodyMedium,
+        maxLines = 4,
+        overflow = TextOverflow.Ellipsis
+        //textAlign = TextAlign.Start
+    )
+}
+
+@Composable
 fun ArticleContentComponent(value: String) {
     Text(
         text = value,
@@ -59,8 +74,8 @@ fun ArticleContentComponent(value: String) {
             .fillMaxWidth()
             .heightIn(),
         style = MaterialTheme.typography.bodyMedium,
-        maxLines = 3,
-        overflow = TextOverflow.Ellipsis
+        //color = MaterialTheme.colorScheme.onSurface
+        color = Color.Gray
         //textAlign = TextAlign.Start
     )
 }
@@ -74,7 +89,7 @@ fun SmallTextComponent(value: String) {
             .heightIn(min = 40.dp)
             .padding(top = dimensionResource(id = R.dimen.padding_small)),
         style = MaterialTheme.typography.labelSmall,
-        textAlign = TextAlign.Start
+        textAlign = TextAlign.Start,
     )
 }
 

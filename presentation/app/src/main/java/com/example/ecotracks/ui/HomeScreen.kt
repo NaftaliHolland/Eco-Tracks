@@ -62,20 +62,23 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.graphics.Color
 import com.example.ecotracks.data.DataSource
 import com.example.ecotracks.ui.OnBoardingScreen
-import com.example.ecotracks.ui.components.BottomBar2
+import com.example.ecotracks.ui.components.BottomBar
 import com.example.ecotracks.ui.components.FloatingButton
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.NavHostController
+import com.example.ecotracks.ui.components.EmissionBottomSheet
 
 
 @Composable
 fun HomeScreen(navController: NavHostController = rememberNavController()) {
+    var showSheet by remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = { },
-        bottomBar = { BottomBar2(navController = navController) },
-        floatingActionButton =  { FloatingButton() },
+        bottomBar = { BottomBar(navController = navController) },
+        floatingActionButton =  { FloatingButton(){ showSheet = true} },
         floatingActionButtonPosition = FabPosition.Center,
-        containerColor = colorScheme.surfaceVariant,
+        //containerColor = colorScheme.surfaceVariant,
     ) { innerPadding ->
         Column(
             verticalArrangement = Arrangement.SpaceEvenly,
@@ -89,6 +92,9 @@ fun HomeScreen(navController: NavHostController = rememberNavController()) {
             avg_stats(25.5, 22.5)
             UserActivityHistory(userActivityList = DataSource().loadUserActivities())
         }
+    }
+    if (showSheet) {
+        EmissionBottomSheet() { showSheet = false }
     }
 }
 
@@ -277,6 +283,6 @@ fun UserActivity(userActivity: UserActivity) {
 
 @Preview(showBackground = true)
 @Composable
-fun UserActivityPreview() {
+fun HomeScreenPreview() {
             HomeScreen()
     }

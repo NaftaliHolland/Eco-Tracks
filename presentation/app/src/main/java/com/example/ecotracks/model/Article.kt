@@ -8,4 +8,5 @@ data class Article(
     @StringRes var title: Int,
     @StringRes var content: Int,
     @IntegerRes var timeToRead: Int,
+    @DrawableRes var image: Int
 )

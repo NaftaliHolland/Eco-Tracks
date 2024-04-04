@@ -25,11 +25,14 @@
     <string name="last_month">Last month</string>
     <string name="co_2">Co2</string>
     <string name="last_year">Last year</string>
+    <string name="record_emission">Record Emission</string>
 
     <string name="meal">meal</string>
     <string name="transport">Transport</string>
     <string name="home">Home</string>
+    <string name="learn">Learn</string>
     <string name="activity">Activity</string>
+    <string name="food">Food</string>
 
     <string name="average_for_a_month">Avarage for a month</string>
     <string name="emission_info">The average footprint emission in kenya is %1$s Kgs per month</string>
@@ -52,5 +55,24 @@
         Some sectors lack well-developed technologies for decarbonization, creating challenges in finding suitable alternatives to high-emissions processes. SAP uses 100% green electricity to power the company’s data centres and is fitting solar across several operations.
         We also invest in collaborations to accelerate and scale green hydrogen production and other solutions. Every sector is different, so working with start-ups and other innovative organizations in your industry is important. Switching to low-carbon technologies and processes often requires substantial upfront investments that might not yield immediate returns, especially for smaller firms that may struggle to secure financing for net zero investments.
         Organizations can explore funding options like green bonds, government incentives and partnerships with sustainable investors. Prioritizing projects with short payback periods can ease financial strain and build confidence.
+    </string>
+
+    <string name="article_title_2">Why plannting and growing trees matters for climate, people and biodiversity</string>
+    <string name="article_content_2">Recent controversy around whether we should be planting trees to combat climate change is a distraction. No credible scientist or conservationist has ever claimed that we can solve the climate crisis with trees alone. But there is plenty of robust scientific evidence to show that we can’t get there without them.
+The science is clear, and repeated studies continue to tell us the same thing: the absolute priority must be to end our reliance on fossil fuels. Burning coal, oil and gas is the single biggest contributor to global warming, and despite numerous global public and private sector commitments, we continue to emit more greenhouse gases year-on-year.
+        However, the science is equally clear that we cannot meet the goals of the Paris Climate Agreement without the conservation and restoration of nature. Carbon capture technologies will be part of the solution in the long term but are still in their infancy, unproven, and in no way ready to absorb the amount of carbon dioxide needed – even with the required reduction and halting of harmful emissions – to keep us on track for a 1.5-degree pathway.
+
+Nature-based solutions are a cost-effective, natural technology that is available to us right now and can provide a third of what is needed to limit climate change. Trees, and more specifically, forests, are a crucial part of that; they both regulate local weather patterns and influence the global climate. So, the protection of the world’s forests that are still standing and the restoration of forests that have been lost, as well as forested land that has been degraded, is essential in the fight against climate change.
+
+Yet, deforestation continues at pace, especially in tropical rainforests, which are some of the most effective carbon-storage systems on the planet. To limit global warming, we must therefore end deforestation. The science now tells us that simply protecting our standing forests is not enough; we must also restore what has been lost.
+        By forest restoration, we do not mean the planting of large monoculture tree plantations; we mean the careful restoration of complex forest ecosystems, with a diversity of native tree-species, growing the right trees, in the right places, in the right way and looking after them over time, so that the forest is restored for the long term, with all the benefits that brings for people, nature and the climate.
+
+Crucially, and this is a point that is so often overlooked, it is not all about carbon.
+
+Forests harbour most of the Earth’s terrestrial biodiversity. As human beings, we rely on biodiversity for life – for the air we breathe, the water we drink and the food we eat. According to recent State of the World’s Forests reports, forests contain 60,000 different tree species, 80% of amphibian species, 75% of bird species, and 68% of the world’s mammal species. Yet, so often the mistake made is to view forest restoration only through the lens of carbon-capture. We must move away from this binary view of forests if we are to begin to understand their true value to humanity, and therefore the imperative to restore them.
+
+As the UN Environment Programme has noted, forests also provide more than 86 million green jobs. Of those living in extreme poverty, over 90% are dependent on forests for food or livelihoods. Global restoration at scale means enabling community-led and locally driven initiatives that create sustainable livelihoods and promote biodiversity for the well-being of the people who depend upon it. Only when the restoration and protection of complex forest ecosystems benefit those who live in and depend upon the forest, so that tree planting becomes true forest restoration, will the long-term carbon capture that we so badly need be achieved.
+
+There is no time left for arguing the point over whether tree planting can “solve the crisis.” It won’t all by itself. First, we must urgently cut fossil fuel use. But restoring the world’s forests – in the right way – will help us to safeguard the future of the planet, and our own future.
     </string>
 </resources>

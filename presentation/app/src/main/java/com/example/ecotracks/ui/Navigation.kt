@@ -44,9 +44,11 @@ import com.example.ecotracks.ui.HomeScreen
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavType
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.example.ecotracks.ui.LearnScreen
 
 
@@ -55,7 +57,7 @@ fun Navigation() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = "onboarding"
+        startDestination = "home"
     ) {
         composable(route = "onboarding") {
             OnBoardingScreen(navController = navController)
@@ -69,8 +71,18 @@ fun Navigation() {
         composable(route = "sign_up") {
             SignUpScreen(navController = navController)
         }
-
-
+        composable(
+            route = "article/{title}/{content}/{image}",
+            arguments = listOf(
+                navArgument("title") { NavType.StringType},
+                navArgument("content") { type = NavType.StringType},
+                navArgument("image") { type = NavType.IntType})
+        ) { backStackEntry ->
+            val title = backStackEntry.arguments?.getString("title")
+            val content = backStackEntry.arguments?.getString("content")
+            val image = backStackEntry.arguments?.getInt("image")
+            ArticleScreen(navController = navController,title = title, content = content, image = image)
+        }
     }
 }
 

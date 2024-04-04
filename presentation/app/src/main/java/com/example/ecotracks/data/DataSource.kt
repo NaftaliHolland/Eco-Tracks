@@ -5,6 +5,7 @@ import com.example.ecotracks.model.BottomSheetItem
 import com.example.ecotracks.model.UserActivity
 import com.example.ecotracks.model.ArticleCategory
 import com.example.ecotracks.model.Article
+import com.example.ecotracks.model.EmissionActivity
 
 class DataSource() {
     fun loadUserActivities() : List<UserActivity> {
@@ -81,33 +82,52 @@ class DataSource() {
                 title = R.string.article_title,
                 content = R.string.article_content,
                 timeToRead = R.integer.time_to_read,
+                image = R.drawable.karsten_wurth_0w_uta0xz7w_unsplash
+            ),
+            Article(
+                title = R.string.article_title_2,
+                content = R.string.article_content_2,
+                timeToRead = R.integer.time_to_read,
+                image = R.drawable.vitor_monthay_ekedharupts_unsplash
             ),
             Article(
                 title = R.string.article_title,
                 content = R.string.article_content,
                 timeToRead = R.integer.time_to_read,
+                image = R.drawable.karsten_wurth_0w_uta0xz7w_unsplash
             ),
             Article(
                 title = R.string.article_title,
                 content = R.string.article_content,
                 timeToRead = R.integer.time_to_read,
+                image = R.drawable.karsten_wurth_0w_uta0xz7w_unsplash
             ),
             Article(
                 title = R.string.article_title,
                 content = R.string.article_content,
                 timeToRead = R.integer.time_to_read,
+                image = R.drawable.karsten_wurth_0w_uta0xz7w_unsplash
             ),
             Article(
                 title = R.string.article_title,
                 content = R.string.article_content,
                 timeToRead = R.integer.time_to_read,
-            ),
-            Article(
-                title = R.string.article_title,
-                content = R.string.article_content,
-                timeToRead = R.integer.time_to_read,
+                image = R.drawable.karsten_wurth_0w_uta0xz7w_unsplash
             ),
 
+        )
+    }
+
+    fun loadActivities() : List<EmissionActivity> {
+        return listOf<EmissionActivity>(
+            EmissionActivity(
+                image = R.drawable.transport,
+                name = R.string.transport
+            ),
+            EmissionActivity(
+                image = R.drawable.food,
+                name = R.string.food
+            ),
         )
     }
 }

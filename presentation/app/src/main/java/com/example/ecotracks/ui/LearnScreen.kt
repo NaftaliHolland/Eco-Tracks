@@ -32,7 +32,7 @@ import androidx.navigation.NavHostController
 import com.example.ecotracks.model.ArticleCategory
 import com.example.ecotracks.ui.components.ArticleFilterChip
 import com.example.ecotracks.data.DataSource
-import com.example.ecotracks.ui.components.BottomBar2
+import com.example.ecotracks.ui.components.BottomBar
 import com.example.ecotracks.ui.components.FloatingButton
 import com.example.ecotracks.model.Article
 import androidx.compose.material3.Surface
@@ -45,20 +45,19 @@ var articles = DataSource().loadArticles()
 fun LearnScreen(navController: NavHostController = rememberNavController()) {
     Scaffold(
         topBar = { },
-        bottomBar = { BottomBar2(navController = navController) },
-        floatingActionButton =  { FloatingButton() },
+        bottomBar = { BottomBar(navController = navController) },
+        floatingActionButton =  { },
         floatingActionButtonPosition = FabPosition.Center,
         //containerColor = MaterialTheme.colorScheme.surfaceVariant,
     ) { innerPadding ->
-
         Column(
             verticalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier
-                .padding(dimensionResource(id = R.dimen.padding_large))
+                .padding(dimensionResource(id = R.dimen.padding_medium))
                 .consumeWindowInsets(innerPadding),
         ) {
             ArticleFilters(filterCategories)
-            ArticleCards(articles)
+            ArticleCards(navController = navController, articleList = articles)
         }
     }
 }
@@ -89,7 +88,8 @@ fun ArticleFilters(
 @Composable
 fun ArticleCards(
     articleList: List<Article>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController()
 ) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium)),
@@ -98,7 +98,9 @@ fun ArticleCards(
             ArticleCard(
                 title = stringResource(id = article.title),
                 content = stringResource(id = article.content),
-                timeToRead = integerResource(article.timeToRead)
+                timeToRead = integerResource(article.timeToRead),
+                navController = navController,
+                image = article.image
             )
         }
     }
