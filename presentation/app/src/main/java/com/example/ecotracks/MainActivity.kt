@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.room.Room
+import com.example.ecotracks.data.UserDatabase
 import com.example.ecotracks.ui.theme.EcoTracksTheme
 import com.example.ecotracks.ui.SignUpScreen
 import com.example.ecotracks.ui.LoginScreen
@@ -39,8 +41,8 @@ class MainActivity : ComponentActivity() {
                     //TransportDuration()
                     //PostsScreen()
                     //PostsList()
-                    LoginScreen()
-                    //SignUpScreen()
+                    //LoginScreen()
+                    SignUpScreen()
                     //Navigation()
                     //HomeScreen()
                     //LearnScreen()

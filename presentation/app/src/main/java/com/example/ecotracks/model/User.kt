@@ -1,5 +1,8 @@
 package com.example.ecotracks.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -21,11 +24,12 @@ data class Post (
     //var pointsEarned: Int? = 0
 )
 
+@Entity
 data class User (
-    val name: String = "",
-    val email: String = "",
-    val password: String = "",
-    val created_at: String = "",
-    val updated_at: String = "",
-    val points_earned: Int = 0
+    @PrimaryKey(autoGenerate = true) val uid: Int = 0,
+    @ColumnInfo(name = "name") val name: String?,
+    @ColumnInfo(name = "email") val email: String?,
+    @ColumnInfo(name = "password") val password: String?,
+    @ColumnInfo(name = "points") val points: Int? = 0
+
 )

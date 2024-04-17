@@ -3,6 +3,10 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
 
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
+
+    id ("kotlin-kapt")
+    //id("com.google.devtools.ksp") version "1.8.20-1.0.10"
+
 }
 
 android {
@@ -81,6 +85,22 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    //room
+    val room_version = "2.6.1"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+
+    kapt("androidx.room:room-compiler:$room_version")
+    //ksp("androidx.room:room-compiler:$room_version")
+
+    implementation("androidx.room:room-ktx:$room_version")
+    implementation("androidx.room:room-rxjava2:$room_version")
+    implementation("androidx.room:room-rxjava3:$room_version")
+    implementation("androidx.room:room-guava:$room_version")
+    implementation("androidx.room:room-testing:$room_version")
+    implementation("androidx.room:room-paging:$room_version")
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

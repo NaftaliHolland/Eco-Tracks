@@ -29,6 +29,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.room.Room
+import com.example.ecotracks.data.UserDatabase
 import com.example.ecotracks.model.EmailState
 import com.example.ecotracks.ui.components.NormalTextComponent
 import com.example.ecotracks.ui.components.HeadingTextComponent
@@ -39,12 +41,33 @@ import com.example.ecotracks.ui.components.PrimaryButtonComponent
 import com.example.ecotracks.model.NameState
 import com.example.ecotracks.model.PasswordState
 import com.example.ecotracks.model.RepeatPasswordState
+import com.example.ecotracks.model.User
 import com.example.ecotracks.ui.SignUpViewModel
 import com.example.ecotracks.ui.components.ErrorTextComponent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @Composable
 fun SignUpScreen(navController: NavHostController = rememberNavController(), signUpViewModel: SignUpViewModel = viewModel()) {
+
+    val appContext = LocalContext.current
+    val db = Room.databaseBuilder(
+        appContext,
+        UserDatabase::class.java, "eco_tracks_db"
+    ).build()
+
+    val newUser = User(name = "Holland", email = "naftaliholland01@gmail.com", password = "naph10503")
+    val userDao = db.userDao()
+    var myUser: User
+
+    LaunchedEffect(true) {
+        userDao.addUser(newUser)
+        myUser = userDao.getUser(email = "naftaliholland01@gmail.com", password = "naph10503")
+
+        println(myUser.name)
+    }
 
     var passwordState = remember { PasswordState() }
     var emailState = remember { EmailState() }
@@ -55,7 +78,9 @@ fun SignUpScreen(navController: NavHostController = rememberNavController(), sig
 
     val onClick: () -> Unit = {
 
+        var name = nameState.text
         var password = passwordState.text
+        var email = emailState.text
         var repeatPassword = repeatPasswordState.text
         if(repeatPassword != password) {
             repeatPasswordState.error = "Passwords don't match"
@@ -107,7 +132,16 @@ fun SignUpScreen(navController: NavHostController = rememberNavController(), sig
 
         if (someValid) {
             println("Everything valid")
-            navController.navigate("home")
+            //create the user
+            var newUser = User(name = name, email = email, password = password)
+
+            CoroutineScope(Dispatchers.IO).launch {
+                userDao.addUser(newUser)
+                var users = userDao.getAll()
+                println(users)
+            }
+
+            //navController.navigate("home")
         } else {
             println("Not everything is valid")
         }
@@ -138,7 +172,7 @@ fun SignUpScreen(navController: NavHostController = rememberNavController(), sig
                 leadingIconRes = R.drawable.person_24px,
                 state = NameState()
                 ){
-
+                nameState.text = it
             }
             MyTextField(
                 labelValue = stringResource(id = R.string.email_address),
