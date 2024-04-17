@@ -42,8 +42,8 @@ class MainActivity : ComponentActivity() {
                     //PostsScreen()
                     //PostsList()
                     //LoginScreen()
-                    SignUpScreen()
-                    //Navigation()
+                    //SignUpScreen()
+                    Navigation()
                     //HomeScreen()
                     //LearnScreen()
                     /*ArticleScreen(

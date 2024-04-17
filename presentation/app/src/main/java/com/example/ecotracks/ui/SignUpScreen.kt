@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -47,16 +48,19 @@ import com.example.ecotracks.ui.components.ErrorTextComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import com.example.ecotracks.data.getDatabase
+import com.example.ecotracks.ui.components.ClickText
 
 
 @Composable
 fun SignUpScreen(navController: NavHostController = rememberNavController(), signUpViewModel: SignUpViewModel = viewModel()) {
 
     val appContext = LocalContext.current
-    val db = Room.databaseBuilder(
+    val db = getDatabase(appContext)
+    /*val db = Room.databaseBuilder(
         appContext,
         UserDatabase::class.java, "eco_tracks_db"
-    ).build()
+    ).build()*/
 
     val newUser = User(name = "Holland", email = "naftaliholland01@gmail.com", password = "naph10503")
     val userDao = db.userDao()
@@ -75,6 +79,10 @@ fun SignUpScreen(navController: NavHostController = rememberNavController(), sig
     var nameState = remember { NameState() }
 
     val signUpUiState by signUpViewModel.uiState.collectAsState()
+
+    val onClick2: () -> Unit = {
+        navController.navigate("login")
+    }
 
     val onClick: () -> Unit = {
 
@@ -141,7 +149,7 @@ fun SignUpScreen(navController: NavHostController = rememberNavController(), sig
                 println(users)
             }
 
-            //navController.navigate("home")
+            navController.navigate("home")
         } else {
             println("Not everything is valid")
         }
@@ -163,7 +171,7 @@ fun SignUpScreen(navController: NavHostController = rememberNavController(), sig
         Column(
             modifier = Modifier
                 .fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_large))
+            verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium))
         ) {
             NormalTextComponent(stringResource(id = R.string.hello, "there"))
             HeadingTextComponent(stringResource(id = R.string.create_account))
@@ -199,6 +207,10 @@ fun SignUpScreen(navController: NavHostController = rememberNavController(), sig
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_height_large)))
             if (!signUpUiState.everythingValid) {
                 ErrorTextComponent(stringResource(id = R.string.ensure_all_fields_are_valid))
+            }
+            Row() {
+                NormalTextComponent(stringResource(id = R.string.already_have_an_account))
+                ClickText("Login", onClick =  onClick2)
             }
             PrimaryButtonComponent(stringResource(id = R.string.sign_up), onClick = onClick)
         }

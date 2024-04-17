@@ -76,6 +76,11 @@ fun Navigation() {
         composable(route = "add_transport_activity") {
             TransportActivityScreen(navController = navController)
         }
+
+        composable(route = "login") {
+            LoginScreen(navController = navController)
+        }
+
         composable(
             route = "article/{title}/{content}/{image}",
             arguments = listOf(

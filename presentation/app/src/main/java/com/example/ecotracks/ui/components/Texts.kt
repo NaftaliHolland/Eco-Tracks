@@ -1,5 +1,6 @@
 package com.example.ecotracks.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
@@ -21,7 +22,6 @@ fun NormalTextComponent(value: String) {
     Text(
         text = value,
         modifier = Modifier
-            .fillMaxWidth()
             .heightIn(min = 40.dp),
         style = MaterialTheme.typography.bodyLarge,
         textAlign = TextAlign.Center
@@ -92,17 +92,14 @@ fun SmallTextComponent(value: String) {
 }
 
 @Composable
-fun ClickText(value: String) {
-    ClickableText(
-        text = AnnotatedString(value),
-        modifier = Modifier
-            .fillMaxWidth()
-            .heightIn(min = 40.dp)
-            .padding(top = dimensionResource(id = R.dimen.padding_small)),
-        style = MaterialTheme.typography.labelSmall,
-        //onClick = { /* TODO */}
-    ) {
-    }
+fun ClickText(value: String, onClick: () -> Unit = {}) {
+    Text(
+        text = value,
+        modifier = Modifier.clickable(
+            onClick = {onClick()}
+        ),
+        color = MaterialTheme.colorScheme.primary
+    )
 }
 
 @Composable
