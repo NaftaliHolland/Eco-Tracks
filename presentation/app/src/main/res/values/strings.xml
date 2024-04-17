@@ -16,7 +16,9 @@
     <string name="welcome_back">Welcome back!</string>
     <string name="save_the_earth">Save the earth with Eco Tracks</string>
     <string name="carbon_saved">%1$s kgs of co2 saved</string>
-    <string name="carbon_quantity">%1$s kg</string>
+    <string name="carbon_quantity">%1$s kgs</string>
+
+    <string name="ensure_all_fields_are_valid">Ensure all fields are valid</string>
 
     <string name="time_to_read">%1$d minutes</string>
     <string name="carbon_emitted">%1$s kg of co2 emitted</string>
@@ -39,6 +41,7 @@
     <string name="hello">Hello, %1$s!</string>
     <string name="what_to_do">What do you want to do for the planet today</string>
     <string name="read_latest_news">Read your latest news and eco-tips</string>
+    <string name="what_activity_to_add">What activity would you like to add?</string>
 
     <string name="activity_name">Walking</string>
     <string name="activity_description">Activity description</string>
@@ -47,6 +50,14 @@
     <string name="terms_and_conditions">By continuing you accept our Privacy Policy and Terms of Use</string>
 
     <string name="email_cant_be_blank">The email can\'t be blank</string>
+
+    <string name="how_did_you_travel">How did you travel?</string>
+    <string name="date_and_time">Date and time</string>
+
+    <string name="date_travelled">Date travelled</string>
+    <string name="time_travelled">Time travelled</string>
+    <string name="journey_time">Journey time</string>
+    <string name="how_did_you_travle">How much did you travle on this day?</string>
 
 
     <string name="article_title">Address energy use and associated financial barriers</string>

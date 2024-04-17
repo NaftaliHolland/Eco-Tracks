@@ -44,6 +44,7 @@ import androidx.compose.material3.MaterialTheme
 import com.example.ecotracks.ui.HomeScreen
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.ecotracks.ui.Screen
@@ -54,12 +55,15 @@ import androidx.navigation.compose.rememberNavController
 fun BottomBar(navController: NavHostController = rememberNavController()) {
     BottomNavigation(
         elevation = 12.dp,
-        backgroundColor = MaterialTheme.colorScheme.inverseOnSurface
+        backgroundColor = MaterialTheme.colorScheme.primaryContainer,
+        modifier = Modifier.clip(shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp))
+
     ) {
         BottomNavigationItem(
             icon = { Icon(
                 painter = painterResource(id = R.drawable.home_24px),
                 contentDescription = "",
+                tint = MaterialTheme.colorScheme.tertiaryContainer
             ) },
             selected = false,
             label = { Text(stringResource(id = R.string.home)) },
@@ -69,6 +73,7 @@ fun BottomBar(navController: NavHostController = rememberNavController()) {
             icon = { Icon(
                 painter = painterResource(id = R.drawable.learn),
                 contentDescription = "",
+                tint = MaterialTheme.colorScheme.tertiaryContainer
             ) },
             selected = false,
             label = { Text(stringResource(id = R.string.learn)) },
@@ -78,6 +83,7 @@ fun BottomBar(navController: NavHostController = rememberNavController()) {
             icon = { Icon(
                 painter = painterResource(id = R.drawable.home_24px),
                 contentDescription = "",
+                tint = MaterialTheme.colorScheme.tertiaryContainer
             ) },
             selected = false,
             label = { Text(stringResource(id = R.string.learn)) },
@@ -87,6 +93,7 @@ fun BottomBar(navController: NavHostController = rememberNavController()) {
             icon = { Icon(
                 painter = painterResource(id = R.drawable.home_24px),
                 contentDescription = "",
+                tint = MaterialTheme.colorScheme.tertiaryContainer
             ) },
             selected = false,
             label = { Text(stringResource(id = R.string.learn)) },
@@ -100,16 +107,19 @@ fun FloatingButton(onClick: () -> Unit = {}) {
     FloatingActionButton(
         onClick = { onClick() },
         shape = CircleShape,
+        containerColor = MaterialTheme.colorScheme.primary
     ) {
         Row(
-            modifier = Modifier.width(400.dp),
+            modifier = Modifier
+                .size(width = 450.dp, height = 60.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.add_circle_24px),
-                contentDescription = "FloatingActionButton"
+                contentDescription = "FloatingActionButton",
             )
+            Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.padding_medium)))
             Text(
                 text = stringResource(id = R.string.record_emission)
             )
@@ -121,6 +131,11 @@ fun FloatingButton(onClick: () -> Unit = {}) {
 @Preview(showBackground = true)
 @Composable
 fun BottomBarPreview() {
-    //BottomBar()
+    BottomBar()
+}
+
+@Preview
+@Composable
+fun floatingActionButtonPreview() {
     FloatingButton()
 }

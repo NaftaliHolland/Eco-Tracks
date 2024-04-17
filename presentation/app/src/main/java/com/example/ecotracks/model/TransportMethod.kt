@@ -3,8 +3,7 @@ package com.example.ecotracks.model
 import androidx.annotation.StringRes
 import androidx.annotation.DrawableRes
 
-data class EmissionActivity(
-    @StringRes var name: Int,
+data class TransportMethod(
     @DrawableRes var image: Int,
-    var amountEmitted: Double? = null
+    @StringRes var name: Int
 )

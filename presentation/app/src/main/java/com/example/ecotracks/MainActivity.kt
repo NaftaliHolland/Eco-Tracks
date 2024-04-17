@@ -15,12 +15,15 @@ import com.example.ecotracks.ui.theme.EcoTracksTheme
 import com.example.ecotracks.ui.SignUpScreen
 import com.example.ecotracks.ui.LoginScreen
 import com.example.ecotracks.ui.OnBoardingScreen
-import com.example.ecotracks.ui.Stats
 import com.example.ecotracks.ui.HomeScreen
 import com.example.ecotracks.ui.LearnScreen
 import com.example.ecotracks.ui.Navigation
 import com.example.ecotracks.ui.ArticleScreen
-
+import com.example.ecotracks.ui.PostsScreen
+import com.example.ecotracks.ui.PostsList
+import com.example.ecotracks.ui.components.TransportDuration
+import com.example.ecotracks.ui.components.TransportActivity
+import com.example.ecotracks.ui.TransportActivityScreen
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +34,14 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //LoginScreeen()
+                    //TransportActivityScreen()
+                    //TransportActivity()
+                    //TransportDuration()
+                    //PostsScreen()
+                    //PostsList()
+                    LoginScreen()
                     //SignUpScreen()
-                    Navigation()
+                    //Navigation()
                     //HomeScreen()
                     //LearnScreen()
                     /*ArticleScreen(

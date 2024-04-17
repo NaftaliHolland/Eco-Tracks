@@ -1,4 +1,5 @@
 package com.example.ecotracks.ui
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -50,6 +51,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.ecotracks.ui.LearnScreen
+import com.example.ecotracks.ui.components.EmissionBottomSheet
 
 
 @Composable
@@ -57,7 +59,7 @@ fun Navigation() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = "home"
+        startDestination = "sign_up"
     ) {
         composable(route = "onboarding") {
             OnBoardingScreen(navController = navController)
@@ -70,6 +72,9 @@ fun Navigation() {
         }
         composable(route = "sign_up") {
             SignUpScreen(navController = navController)
+        }
+        composable(route = "add_transport_activity") {
+            TransportActivityScreen(navController = navController)
         }
         composable(
             route = "article/{title}/{content}/{image}",
@@ -85,4 +90,3 @@ fun Navigation() {
         }
     }
 }
-

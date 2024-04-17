@@ -6,6 +6,7 @@ import com.example.ecotracks.model.UserActivity
 import com.example.ecotracks.model.ArticleCategory
 import com.example.ecotracks.model.Article
 import com.example.ecotracks.model.EmissionActivity
+import com.example.ecotracks.model.TransportMethod
 
 class DataSource() {
     fun loadUserActivities() : List<UserActivity> {
@@ -128,6 +129,57 @@ class DataSource() {
                 image = R.drawable.food,
                 name = R.string.food
             ),
+        )
+    }
+
+    fun loadHomeActivities() : List<EmissionActivity> {
+        return listOf<EmissionActivity>(
+            EmissionActivity(
+                image = R.drawable.transport,
+                name = R.string.transport,
+                amountEmitted = 34.2
+            ),
+            EmissionActivity(
+                image = R.drawable.food,
+                name = R.string.food,
+                amountEmitted = 22.6
+            ),
+            EmissionActivity(
+                image = R.drawable.food,
+                name = R.string.food,
+                amountEmitted = 22.6
+            ),
+            EmissionActivity(
+                image = R.drawable.food,
+                name = R.string.food,
+                amountEmitted = 22.6
+            )
+        )
+    }
+
+    fun loadTransportMethods() : List<TransportMethod> {
+        return listOf<TransportMethod> (
+            TransportMethod(
+                image = R.drawable.transport,
+                name = R.string.transport
+            ),
+            TransportMethod(
+                image = R.drawable.transport,
+                name = R.string.transport
+            ),
+            TransportMethod(
+                image = R.drawable.transport,
+                name = R.string.transport
+            ),
+            TransportMethod(
+                image = R.drawable.transport,
+                name = R.string.transport
+            ),
+            TransportMethod(
+                image = R.drawable.transport,
+                name = R.string.transport
+            )
+
         )
     }
 }

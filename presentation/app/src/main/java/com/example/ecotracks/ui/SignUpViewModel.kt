@@ -21,7 +21,6 @@ class SignUpViewModel: ViewModel() {
                 password = value,
                 isPasswordValid = valid
             )
-
         }
     }
 
@@ -40,5 +39,21 @@ class SignUpViewModel: ViewModel() {
                 acceptedTerms = true
             )
         }
+    }
+
+    fun validateData(
+        nameValid: Boolean,
+        emailValid: Boolean,
+        passwordValid: Boolean,
+        repeatPasswordValid: Boolean,
+        termsAccepted: Boolean,
+    ): Boolean {
+        var isValid = (nameValid && emailValid && passwordValid && repeatPasswordValid && termsAccepted)
+        _uiState.update { currentState ->
+            currentState.copy(
+                everythingValid = isValid
+            )
+        }
+        return isValid
     }
 }

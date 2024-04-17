@@ -60,7 +60,7 @@ fun ArticleCardContentComponent(value: String) {
             .fillMaxWidth()
             .heightIn(),
         style = MaterialTheme.typography.bodyMedium,
-        maxLines = 4,
+        maxLines = 3,
         overflow = TextOverflow.Ellipsis
         //textAlign = TextAlign.Start
     )
@@ -85,9 +85,7 @@ fun SmallTextComponent(value: String) {
     Text(
         text = value,
         modifier = Modifier
-            .fillMaxWidth()
-            .heightIn(min = 40.dp)
-            .padding(top = dimensionResource(id = R.dimen.padding_small)),
+            .fillMaxWidth(),
         style = MaterialTheme.typography.labelSmall,
         textAlign = TextAlign.Start,
     )

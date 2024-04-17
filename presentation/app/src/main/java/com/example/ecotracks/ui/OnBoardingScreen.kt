@@ -47,7 +47,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.ecotracks.ui.Stats
 import com.example.ecotracks.ui.UserInfo
 import com.example.ecotracks.ui.components.PrimaryButtonComponent
 import com.example.ecotracks.ui.components.ClickText

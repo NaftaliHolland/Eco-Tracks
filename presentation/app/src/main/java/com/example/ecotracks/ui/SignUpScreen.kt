@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -39,6 +40,7 @@ import com.example.ecotracks.model.NameState
 import com.example.ecotracks.model.PasswordState
 import com.example.ecotracks.model.RepeatPasswordState
 import com.example.ecotracks.ui.SignUpViewModel
+import com.example.ecotracks.ui.components.ErrorTextComponent
 
 
 @Composable
@@ -47,27 +49,70 @@ fun SignUpScreen(navController: NavHostController = rememberNavController(), sig
     var passwordState = remember { PasswordState() }
     var emailState = remember { EmailState() }
     var repeatPasswordState = remember { RepeatPasswordState() }
+    var nameState = remember { NameState() }
 
     val signUpUiState by signUpViewModel.uiState.collectAsState()
 
     val onClick: () -> Unit = {
+
         var password = passwordState.text
         var repeatPassword = repeatPasswordState.text
         if(repeatPassword != password) {
             repeatPasswordState.error = "Passwords don't match"
+        } else {
+            repeatPasswordState.error = ""
         }
-        var email = emailState.text
-        var isValid: Boolean = emailState.error == ""
+        //var email = emailState.text
+        //var isValid: Boolean = emailState.error == ""
         if (!signUpUiState.acceptedTerms) {
             println("Not selected")
         } else {
             println(" Selected ")
         }
+
+        var nameValid: Boolean = nameState.error == ""
+        var emailValid: Boolean = emailState.error == ""
+        var passwordValid: Boolean = passwordState.error == ""
+        var repeatPasswordValid: Boolean = repeatPasswordState.error == ""
+        var termsAccepted: Boolean = signUpUiState.acceptedTerms
+
+
         signUpViewModel.setPassword(passwordState.text, passwordState.error == "")
         signUpViewModel.setEmail(emailState.text, emailState.error == "")
 
-        //navController.navigate("home")
+        /**var nameValid: Boolean = signUpUiState.isNameValid
+        var name = signUpUiState.name
+        var emailValid: Boolean = signUpUiState.isEmailValid
+        var email = signUpUiState.email
+        var passwordValid: Boolean = signUpUiState.isPasswordValid
+        var password2 = signUpUiState.password
+        var repeatPasswordValid: Boolean = signUpUiState.isRepeatedPasswordValid
+        var repeatPassword2 = signUpUiState.repeatedPassword
+        var termsAccepted: Boolean = signUpUiState.acceptedTerms**/
+
+        var someValid = signUpViewModel.validateData(nameValid, emailValid, passwordValid, repeatPasswordValid, termsAccepted)
+
+        var inputValid = !signUpUiState.everythingValid
+
+        /*println(name + email + password2 + repeatPassword2)
+        println(name + nameValid )
+        println(email + emailValid)
+        println(password2 + passwordValid)
+        println(repeatPassword2 + repeatPasswordValid)*/
+        println(nameValid)
+        println(emailValid)
+        println(passwordValid)
+        println(repeatPasswordValid)
+        println(termsAccepted)
+
+        if (someValid) {
+            println("Everything valid")
+            navController.navigate("home")
+        } else {
+            println("Not everything is valid")
+        }
     }
+
     val onChecked: (checked: Boolean) -> Unit = {checked ->
         signUpViewModel.setPrivacy(checked)
     }
@@ -75,7 +120,6 @@ fun SignUpScreen(navController: NavHostController = rememberNavController(), sig
    // signUpViewModel.setPassword(passwordState.text)
     //var a = passwordState.text
     //println(a)
-
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -119,6 +163,9 @@ fun SignUpScreen(navController: NavHostController = rememberNavController(), sig
             }
             CheckBoxComponent(stringResource(id = R.string.terms_and_conditions), onChecked = onChecked)
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_height_large)))
+            if (!signUpUiState.everythingValid) {
+                ErrorTextComponent(stringResource(id = R.string.ensure_all_fields_are_valid))
+            }
             PrimaryButtonComponent(stringResource(id = R.string.sign_up), onClick = onClick)
         }
 

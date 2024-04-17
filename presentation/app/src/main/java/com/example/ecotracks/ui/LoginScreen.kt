@@ -19,13 +19,13 @@ import androidx.navigation.NavHostController
 import com.example.ecotracks.ui.components.NormalTextComponent
 import com.example.ecotracks.ui.components.HeadingTextComponent
 import com.example.ecotracks.ui.components.MyTextField
-import com.example.ecotracks.ui.components.PasswordTextFieldComponent
 import com.example.ecotracks.ui.components.PrimaryButtonComponent
 import com.example.ecotracks.ui.components.ClickText
-
+import com.example.ecotracks.ui.components.PasswordTextFieldComponent
 
 @Composable
 fun LoginScreen(navController: NavHostController = rememberNavController()) {
+
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -42,10 +42,11 @@ fun LoginScreen(navController: NavHostController = rememberNavController()) {
                 labelValue = stringResource(id = R.string.email_address),
                 leadingIconRes = R.drawable.baseline_email_24
             ) {}
-           /* PasswordTextFieldComponent(
+            PasswordTextFieldComponent(
                 labelValue = stringResource(id = R.string.password),
-                leadingIconRes = R.drawable.baseline_lock_outline_24
-            )*/
+                leadingIconRes = R.drawable.baseline_lock_outline_24,
+            ) {
+            }
             ClickText(stringResource(id = R.string.forgot_password))
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_height_large)))
             PrimaryButtonComponent(stringResource(id = R.string.sign_in))

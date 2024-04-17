@@ -10,5 +10,7 @@ data class SignUpState(
     val repeatedPassword: String = "",
     val isRepeatedPasswordValid: Boolean = false,
     val acceptedTerms: Boolean = false,
-    val termsError: String? = null
+    val termsError: String? = null,
+
+    val everythingValid: Boolean = true
 )

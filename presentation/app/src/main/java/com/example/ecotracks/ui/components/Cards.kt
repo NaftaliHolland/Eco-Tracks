@@ -1,5 +1,4 @@
 package com.example.ecotracks.ui.components
-
 import android.graphics.Paint
 import androidx.compose.foundation.border
 import androidx.compose.runtime.Composable
@@ -35,7 +34,10 @@ import androidx.compose.foundation.layout.heightIn
 import com.example.ecotracks.model.TextFieldState
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.ui.graphics.Brush
@@ -49,11 +51,88 @@ import com.example.ecotracks.ui.components.ArticleCardContentComponent
 import androidx.compose.material3.CardColors
 import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CardDefaults
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import androidx.compose.material3.OutlinedCard
+import androidx.compose.material3.Surface
+import com.example.ecotracks.data.DataSource
+import com.example.ecotracks.ui.components.TransportDuration
 
 
+@Composable
+fun TransportActivity(
+    modifier: Modifier = Modifier
+) {
+    val transportMethodsList = DataSource().loadTransportMethods()
+
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(400.dp),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_medium))
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(dimensionResource(id = R.dimen.padding_medium))
+                .fillMaxSize()
+        ) {
+            //ArticleCardContentComponent(stringResource(id = R.string.how_did_you_travel))
+            Text(stringResource(id = R.string.how_did_you_travel))
+            LazyRow(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small))
+            ) {
+                items(transportMethodsList) { transportMethod ->
+                    TransportMethod(
+                        image = transportMethod.image,
+                        name = stringResource(id = transportMethod.name)
+                    )
+                }
+            }
+            TransportDuration()
+        }
+
+    }
+}
+
+@Composable
+fun TransportMethod(
+    image: Int,
+    name: String
+) {
+    Column(modifier = Modifier
+        .size(width = 100.dp, height = 150.dp)
+        .clickable(
+            onClick = { /** TODO **/ }
+        ))
+    {
+        Card(
+            modifier = Modifier
+                .size(height = 100.dp, width = 100.dp)
+                .padding(bottom = dimensionResource(id = R.dimen.padding_small)),
+
+        ) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Icon(
+                    painter = painterResource(id = image),
+                    contentDescription = "",
+                )
+            }
+        }
+
+        NormalTextComponent(name)
+    }
+}
 @Composable
 fun ArticleCard(
     title: String,
@@ -69,25 +148,30 @@ fun ArticleCard(
             .height(250.dp)
         ,
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_medium)),
-        /*colors = CardColors(
-            containerColor = Color(0xffe2a128),
-            //containerColor =  Color(0xFFFCB42C),
-            contentColor = MaterialTheme.colorScheme.onPrimary,
+        colors = CardColors(
+            containerColor = Color(0xffbae5e9),
+            contentColor = MaterialTheme.colorScheme.scrim,
             disabledContainerColor = MaterialTheme.colorScheme.onPrimary,
             disabledContentColor = MaterialTheme.colorScheme.onPrimary
-        ),*/
+        ),
         onClick = {
             navController.navigate("article/${title}/${content}/${image}")
         }
     ) {
-        Column(
-            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium)),
-            verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
-        ) {
-            ArticleTitleComponent(title)
-            ArticleCardContentComponent(content)
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_height_small)))
-            ArticleTime(timeToRead)
+        Box(
+            modifier = Modifier
+                .background(brush = Brush.horizontalGradient(colors = listOf(Color(0xffd1edf0), Color(0xff8dd3db))))
+                .fillMaxSize(),
+        ){
+            Column(
+                modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium)),
+                verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
+            ) {
+                ArticleTitleComponent(title)
+                ArticleCardContentComponent(content)
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_height_small)))
+                ArticleTime(timeToRead)
+            }
         }
     }
 }
@@ -95,12 +179,13 @@ fun ArticleCard(
 @Composable
 fun ActivityCard(
     image: Int,
-    name: String
+    name: String,
+    onClick: () -> Unit = {}
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(50.dp)
+            .height(100.dp)
         ,
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_medium)),
         /*colors = CardColors(
@@ -110,10 +195,12 @@ fun ActivityCard(
             disabledContainerColor = MaterialTheme.colorScheme.onPrimary,
             disabledContentColor = MaterialTheme.colorScheme.onPrimary
         ),*/
-        onClick = {}
+        onClick = { onClick() }
     ) {
         Row(
-            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium)),
+            modifier = Modifier
+                .padding(dimensionResource(id = R.dimen.padding_medium))
+                .fillMaxHeight(),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -152,6 +239,71 @@ fun ArticleTime(time: Int) {
 }
 
 
+@Composable
+fun HomeActivityCard(image: Int, name: String, amountEmitted: Double) {
+    Card(
+        modifier = Modifier
+            .size(height = 150.dp, width = 180.dp),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_small)),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 1.dp),
+        colors = CardColors(
+            containerColor = MaterialTheme.colorScheme.onPrimary,
+            contentColor = MaterialTheme.colorScheme.scrim,
+            disabledContainerColor = MaterialTheme.colorScheme.onPrimary,
+            disabledContentColor = MaterialTheme.colorScheme.onPrimary
+        ),
+        //border = BorderStroke(width = 0.5.dp, color = MaterialTheme.colorScheme.primary),
+        onClick = {}
+    ) {
+        Column(
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium)),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Icon(
+                painter = painterResource(id = image),
+                contentDescription = "",
+            )
+            HeadingTextComponent(name)
+            NormalTextComponent(stringResource(id = R.string.carbon_quantity, amountEmitted))
+        }
+    }
+
+}
+
+@Composable
+fun HomeCard() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(250.dp),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_small)),
+        //shape = RoundedCornerShape(300.dp),
+        //elevation = CardDefaults.cardElevation(
+            //defaultElevation = 3.dp),
+        /*colors = CardColors(
+            containerColor = Color(0xff8dd3db),
+            contentColor = MaterialTheme.colorScheme.scrim,
+            disabledContainerColor = MaterialTheme.colorScheme.onPrimary,
+            disabledContentColor = MaterialTheme.colorScheme.onPrimary
+        ),*/
+        //border = BorderStroke(width = 15.dp, color = MaterialTheme.colorScheme.primary),
+        onClick = {}
+    ) {
+        Box(
+            modifier = Modifier
+                .background(brush = Brush.horizontalGradient(colors = listOf(Color(0xffd1edf0), Color(0xff8dd3db))))
+                .fillMaxSize(),
+        )
+    }
+}
+
+@Preview
+@Composable
+fun TransportActivityPreview() {
+    TransportActivity()
+}
 @Preview(showBackground = true)
 @Composable
 fun LearnCardPreview() {
@@ -176,4 +328,30 @@ fun ActivityCardPreview() {
         image = R.drawable.transport,
         name = stringResource(id = R.string.transport)
     )
+}
+
+@Preview
+@Composable
+fun TransportMethodPreview() {
+    TransportMethod(
+        image = R.drawable.transport,
+        name = stringResource(id = R.string.transport)
+    )
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun HomeActivityCardPreview() {
+    HomeActivityCard(
+        image = R.drawable.transport,
+        name = stringResource(id = R.string.transport),
+        amountEmitted = 23.23
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun HomeCardPreview() {
+    HomeCard()
 }

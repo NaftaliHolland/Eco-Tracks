@@ -1,5 +1,6 @@
 package com.example.ecotracks.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.Column
@@ -51,15 +52,20 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import com.example.ecotracks.model.UserActivity
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import com.example.ecotracks.data.DataSource
 import com.example.ecotracks.ui.OnBoardingScreen
 import com.example.ecotracks.ui.components.BottomBar
@@ -67,44 +73,59 @@ import com.example.ecotracks.ui.components.FloatingButton
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.NavHostController
 import com.example.ecotracks.ui.components.EmissionBottomSheet
+import com.example.ecotracks.ui.components.HomeActivityCard
+import com.example.ecotracks.ui.components.HomeCard
 
 
 @Composable
 fun HomeScreen(navController: NavHostController = rememberNavController()) {
     var showSheet by remember { mutableStateOf(false) }
 
+    val onTransportClick: () -> Unit = {
+        navController.navigate("add_transport_activity")
+    }
+
     Scaffold(
         topBar = { },
         bottomBar = { BottomBar(navController = navController) },
         floatingActionButton =  { FloatingButton(){ showSheet = true} },
         floatingActionButtonPosition = FabPosition.Center,
+        //containerColor = Color(0xffecf7ff),
+        containerColor = Color(0xffe8f6f8),
         //containerColor = colorScheme.surfaceVariant,
     ) { innerPadding ->
-        Column(
-            verticalArrangement = Arrangement.SpaceEvenly,
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(80.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .padding(dimensionResource(id = R.dimen.padding_small))
-                .consumeWindowInsets(innerPadding),
-        ){
-            UserInfo("Holland")
-            Stats(53.23)
-            Filters()
-            avg_stats(25.5, 22.5)
-            UserActivityHistory(userActivityList = DataSource().loadUserActivities())
+                .padding(dimensionResource(id = R.dimen.padding_medium))
+                .consumeWindowInsets(innerPadding)
+        ) {
+
+            item {
+                UserInfo("Holland")
+            }
+            item {
+                HomeCard()
+            }
+            item {
+                HomeActivityCards()
+            }
         }
     }
     if (showSheet) {
-        EmissionBottomSheet() { showSheet = false }
+        EmissionBottomSheet(onTransportClick) { showSheet = false }
     }
 }
 
 @Composable
-fun UserInfo(name: String) {
+fun UserInfo(name: String, profile_photo_id: Int = R.drawable.profile) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(dimensionResource(id = R.dimen.padding_small)),
-        horizontalArrangement = Arrangement.Center
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Column(
 
@@ -120,121 +141,18 @@ fun UserInfo(name: String) {
         Spacer(
             modifier = Modifier.weight(1f)
         )
-        Icon(
-            painter = painterResource(id = R.drawable.person_24px),
+        Image(
+            painter = painterResource(id = profile_photo_id),
             contentDescription = "",
-        )
-    }
-}
-
-@Composable
-fun Stats(co2_amount: Double) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(dimensionResource(id = R.dimen.padding_medium)),
-        //verticalArrangement = Arrangement.SpaceBetween,
-        //horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Column(
+            contentScale = ContentScale.Crop,
             modifier = Modifier
-                .fillMaxWidth(),
-            verticalArrangement = Arrangement.SpaceBetween,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = stringResource(id = R.string.co_2),
-                style = MaterialTheme.typography.titleLarge,
-                color = Color.Green
-            )
-            Text(
-                text = stringResource(id = R.string.carbon_quantity, co2_amount),
-                style = MaterialTheme.typography.displayLarge
-            )
-            Text(
-                text = stringResource(id = R.string.average_for_a_month),
-                style = MaterialTheme.typography.bodyLarge
-            )
-        }
-        Spacer(
-            modifier = Modifier.height(dimensionResource(id = R.dimen.padding_medium))
-        )
-        Text(
-            text = stringResource(id = R.string.emission_info, co2_amount),
-            style = MaterialTheme.typography.bodyLarge,
-            textAlign = TextAlign.Center
+                .size(50.dp)
+                .clip(CircleShape)
         )
     }
 }
 
-@Composable
-fun Filters(modifier: Modifier = Modifier) {
-    Row(
-        modifier = Modifier
-            .height(IntrinsicSize.Min)
-            .fillMaxWidth()
-            .padding(dimensionResource(id = R.dimen.padding_medium)),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
 
-        /* TODO MAKE THESE CLICKABLE */
-        Text(
-            text = stringResource(id = R.string.today),
-            modifier = Modifier.clickable{}
-        )
-        VerticalDivider(modifier = Modifier.fillMaxHeight())
-        Text(
-            text = stringResource(id = R.string.last_month)
-        )
-        VerticalDivider()
-        Text(
-            text = stringResource(id = R.string.last_year)
-        )
-    }
-}
-
-@Composable
-fun avg_stats(co2_saved: Double, co2_emitted: Double, modifier: Modifier = Modifier) {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        Row(
-            modifier = Modifier
-                .padding(dimensionResource(id = R.dimen.padding_small))
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.Start,
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.cloud_upload_24px),
-                contentDescription = "",
-                modifier = Modifier.padding(end = dimensionResource(id = R.dimen.padding_medium)),
-                tint = Color.Green
-            )
-            Text(
-                text = stringResource(id = R.string.carbon_saved, co2_saved),
-                style = MaterialTheme.typography.titleMedium
-            )
-        }
-
-        Row(
-            modifier = Modifier
-                .padding(dimensionResource(id = R.dimen.padding_small))
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.Start,
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.cloud_download_24px),
-                contentDescription = "",
-                modifier = Modifier.padding(end = dimensionResource(id = R.dimen.padding_medium)),
-                tint = Color.Red
-            )
-            Text(
-                text = stringResource(id = R.string.carbon_emitted, co2_emitted),
-                style = MaterialTheme.typography.titleMedium
-            )
-        }
-    }
-}
 
 @Composable
 fun UserActivityHistory(
@@ -281,8 +199,34 @@ fun UserActivity(userActivity: UserActivity) {
     }
 }
 
+@Composable
+fun HomeActivityCards() {
+    val homeActivitiesList = DataSource().loadHomeActivities()
+
+    LazyRow(
+        modifier = Modifier
+            .fillMaxWidth(),
+
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
+    ) {
+        items(homeActivitiesList) { homeActivity ->
+            HomeActivityCard(
+                image = homeActivity.image,
+                name = stringResource(id = homeActivity.name),
+                amountEmitted = homeActivity.amountEmitted!!
+            )
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-            HomeScreen()
-    }
+    HomeScreen()
+}
+
+@Preview(showBackground = true)
+@Composable
+fun HomeActivityCardsPreview() {
+    HomeActivityCards()
+}

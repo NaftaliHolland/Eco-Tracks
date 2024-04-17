@@ -1,5 +1,5 @@
 @file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class,
-    ExperimentalMaterial3Api::class
+    ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class
 )
 
 package com.example.ecotracks.ui.components
@@ -23,12 +23,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.ecotracks.R
 import com.example.ecotracks.data.DataSource
 import com.example.ecotracks.ui.components.ActivityCard
 
 @Composable
-fun EmissionBottomSheet(onDismiss: () -> Unit = {}) {
+fun EmissionBottomSheet(onTransportClick: () -> Unit = {}, onDismiss: () -> Unit = {}) {
     val activitiesList = DataSource().loadActivities()
 
     val modalBottomSheetState = rememberModalBottomSheetState()
@@ -39,7 +41,24 @@ fun EmissionBottomSheet(onDismiss: () -> Unit = {}) {
         sheetState = modalBottomSheetState,
         dragHandle = { BottomSheetDefaults.DragHandle() }
     ) {
-        LazyColumn(
+        NormalTextComponent(stringResource(id = R.string.what_activity_to_add))
+
+        Column(
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium)),
+            verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
+        ) {
+            ActivityCard(
+                image = R.drawable.transport,
+                name = stringResource(id = R.string.transport),
+                onClick = onTransportClick
+            )
+
+            ActivityCard(
+                image = R.drawable.food,
+                name = stringResource(R.string.food),
+            )
+        }
+        /**LazyColumn(
             modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium)),
             verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
         ) {
@@ -50,7 +69,7 @@ fun EmissionBottomSheet(onDismiss: () -> Unit = {}) {
                     name = stringResource(id = activity.name)
                 )
             }
-        }
+        }**/
     }
 }
 
