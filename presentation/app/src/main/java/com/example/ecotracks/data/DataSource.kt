@@ -160,12 +160,12 @@ class DataSource() {
     fun loadTransportMethods() : List<TransportMethod> {
         return listOf<TransportMethod> (
             TransportMethod(
-                image = R.drawable.transport,
-                name = R.string.transport
+                image = R.drawable.cycling,
+                name = R.string.cycling
             ),
             TransportMethod(
-                image = R.drawable.transport,
-                name = R.string.transport
+                image = R.drawable.train,
+                name = R.string.train
             ),
             TransportMethod(
                 image = R.drawable.transport,

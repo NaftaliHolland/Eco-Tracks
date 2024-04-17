@@ -59,6 +59,9 @@
     <string name="journey_time">Journey time</string>
     <string name="how_did_you_travle">How much did you travle on this day?</string>
 
+    <string name="train">train</string>
+    <string name="cycling">cycling</string>
+
 
     <string name="article_title">Address energy use and associated financial barriers</string>
     <string name="article_content">
